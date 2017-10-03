@@ -1,7 +1,7 @@
 var app = angular.module('app');
 app.service("userInfoService", function() {
   var userInfo = {
-    isAuthenticated : true
+    isAuthenticated : false
   };
   return{
     getUserInfo : function(){
