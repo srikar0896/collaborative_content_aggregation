@@ -1,0 +1,8 @@
+.card{
+  box-shadow:none !important;
+}
+.card-content .content-info{
+  position:relative !important;
+  margin-left:20px !important;
+  margin-top: 20px !important;
+}

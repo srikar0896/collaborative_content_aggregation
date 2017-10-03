@@ -1,0 +1,63 @@
+<style>
+body{
+  background: white !important;
+}
+.header-filter:after {
+    background: white !important;
+}
+</style>
+<nav class="navbar navbar-primary" style="background:white;color:#212121;">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-primary">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    </div>
+
+    <div class="collapse navbar-collapse pull-right" id="example-navbar-primary">
+      <ul class="nav navbar-nav">
+        <li ui-sref="ask">
+          <a style="cursor:pointer">
+          <i class="material-icons">info_outline</i>About<div class="ripple-container"></div></a>
+        </li>
+        <li>
+          <a>
+            <i class="material-icons">report</i>Report
+          </a>
+        </li>
+        <li ui-sref="">
+          <a ui-sref="">
+            <i class="material-icons">feedback</i>Feedback
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="wrapper" style="height:100%" ng-controller="logoutController">
+<div class="header header-filter" style="height:100%;background:white; background-size: cover; background-position: top center;">
+  <div class="container" style="height:100%">
+    <div class="row" style="height:100%">
+      <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-2" style="margin-top:80px">
+        <div class="card card-signup" style="box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
+          <form class="form ng-pristine ng-valid" method="" action="">
+            <div class="content" style=" padding-top: 40px; padding-left: 80px;padding-bottom: 40px;">
+            <center>
+              <h2>You have signed out.<img src="https://moc.media/media/images/4c1d0458c1e011e6bc359c8e99086854-pic1.png" height="38px" width="auto" style="margin-left:-35px; margin-top:-15px;width:108px "></h2>
+            </center>
+              <p class="text-divider"><a class="btn btn-success btn-round" style="margin-left:-50px;" ui-sref="login" style="cursor:pointer" href="#!/login">Sign back in</a></p>
+            </div>
+            <div class="footer text-center">
+              <!-- ngIf: showLoader == false -->
+              <!-- ngIf: showLoader == true -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

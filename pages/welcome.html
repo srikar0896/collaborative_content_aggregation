@@ -1,0 +1,29 @@
+<style>
+  body{
+    background: #82bff2 !important;
+  }
+  .card{
+    background: #82bff2 !important;
+  }
+</style>
+<div ng-controller="welcomeController" class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3" style="margin-top:10%;">
+  <div class="card">
+    <div class="card-content" style="background:white;position:relative;border-radius:10px">
+      <div class="icon icon-info col-sm-offset-4">
+        <img class="media-object" style="width:110px;border-radius:10px" src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo()['username']}}@adorable.io.png">
+
+					</div>
+      <!-- <div class="media">
+      </div>
+            <div class="avatar">
+      </div> -->
+      <h4 class="card-title">
+            <a href="#pablo">Welcome {{userInfoService.getUserInfo()["username"]}}!</a>
+          </h4>
+          <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="footer text-center" ui-sref="dashboard">
+	    	      <a class="btn btn-social btn-fill btn-twitter btn-round">Take me to Dashboard</a>
+          </div>
+    </div>
+  </div>
+</div>

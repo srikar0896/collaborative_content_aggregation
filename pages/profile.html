@@ -1,0 +1,134 @@
+<div class="profile-page">
+<div class="wrapper" ng-controller="profileController">
+
+
+<div class="main main-raised" style="padding-top:100px;">
+<button style="margin-bottom:80px;" class="btn btn-simple btn-primary" ui-sref="dashboard">Back To Dashboad</button>
+  <div class="profile-content">
+
+          <div class="container">
+              <div class="row">
+                  <div class="profile pull-left" style="margin-top:100px">
+                    <div class="icon icon-info">
+                      <img class="media-object" style="width:110px;border-radius:10px" src="https://api.adorable.io/avatars/285/{{username}}@adorable.io.png">
+
+                      </div>
+                      <div class="name">
+                          <h3 class="title">{{username}}</h3>
+                          <div ng-show="isOwnerProfile()">
+                          <small class="pointer" data-toggle="modal" data-target="#checkPasswordModal"><i class="material-icons" style="font-size:12px">mode_edit</i>Change password</small>
+                          <br>
+                          <small data-toggle="modal" data-target="#addDescriptionModal" class="pointer"><i class="material-icons" style="font-size:12px">mode_edit</i>Add Description</small>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+      <div class="row">
+        <div class="name">
+            <h1 class="title">Questions asked - {{userQuestions.length}}</h1>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+		                        <div class="table-responsive">
+		                        <table class="table">
+		                            <thead>
+		                                <tr>
+		                                    <th class="text-center">#</th>
+		                                    <th>Question</th>
+                                        <th>Category</th>
+		                                    <th>Description</th>
+                                        <th>Time</th>
+		                                    <th>Answers</th>
+		                                    <th class="text-right">Actions</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody>
+
+		                                <tr ng-repeat="question in userQuestions">
+
+		                                    <td class="text-center">{{$index + 1}}</td>
+		                                    <td class="pointer" ui-sref="question({'q': question.questionID} )" style="width:250px">{{question.question}}</td>
+                                        <td><span class="label label-info">{{question.category}}</span></td>
+		                                    <td style="width:330px">{{question.description}}</td>
+		                                    <td style="width:180px">{{timeService.getTime(question.questionID)}}</td>
+                                        <td>{{question.answers}}</td>
+		                                    <td class="td-actions text-right">
+		                                        <button type="button" rel="tooltip" class="btn btn-info btn-round" data-original-title="" title="">
+		                                            <i class="material-icons">mode_edit</i>
+		                                        </button>
+                                            <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="">
+		                                            <i class="material-icons">delete</i>
+		                                        </button>
+		                                    </td>
+		                                </tr>
+
+		                            </tbody>
+		                        </table>
+		                        </div>
+		                    </div>
+              </div>
+
+          </div>
+      </div>
+</div>
+
+</div>
+<div class="modal fade in" id="checkPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<i class="material-icons">clear</i>
+				</button>
+				<h4 class="modal-title">Reset Password</h4>
+			</div>
+			<div class="modal-body">
+        <div class="input-group" style="margin-top:20px">
+          <span class="input-group-addon">
+            <i class="material-icons">lock_outline</i>
+          </span>
+          <input type="password" placeholder="Old Password..." ng-model="password1" class="form-control" />
+        </div>
+        <div class="input-group" style="margin-top:20px">
+          <span class="input-group-addon">
+            <i class="material-icons">lock_outline</i>
+          </span>
+          <input type="password" placeholder="New Password..." ng-model="password2" class="form-control" />
+        </div>
+        <div class="input-group" style="margin-top:20px">
+          <span class="input-group-addon">
+            <i class="material-icons">lock_outline</i>
+          </span>
+          <input type="password" placeholder="Confirm New Password..." ng-model="password3" class="form-control" />
+        </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-simple">Done</button>
+				<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade in" id="addDescriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<i class="material-icons">clear</i>
+				</button>
+				<h4 class="modal-title">Add Description</h4>
+			</div>
+			<div class="modal-body">
+        <div class="form-group label-floating is-empty">
+          <label class="control-label">Add Description</label>
+          <textarea class="form-control" ng-model="questionDescription"  rows="4"></textarea>
+        <span class="material-input"></span></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-simple">Done</button>
+				<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

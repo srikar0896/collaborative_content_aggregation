@@ -1,0 +1,154 @@
+<div ng-controller="openQuestionController">
+	<nav class="navbar navbar-primary">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-primary">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+				<a class="navbar-brand" href="#pablo">{{userInfoService.getUserInfo()["username"]}}</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="example-navbar-primary">
+				<ul class="nav navbar-nav navbar-right">
+					<li ui-sref="ask">
+						<a style="cursor:pointer" ui-sref="ask">
+            <i class="material-icons">add_circle_outline</i>Create Thread<div class="ripple-container"></div></a>
+					</li>
+					<li class="active" ui-sref="dashboard">
+						<a ui-sref="dashboard">
+	            <i class="material-icons">explore</i>
+	            Discover
+            </a>
+					</li>
+					<li ui-sref="profile">
+						<a ui-sref="profile">
+               <img src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo()['username']}}@adorable.io.png" alt="..." style="border-radius:3px;height:24px;margin-top:-6px;" class="avatar img-raised">
+                              Profile
+            </a>
+					</li>
+					<li ui-sref="logout">
+						<a ui-sref="logout">
+            <i class="material-icons">settings</i>
+            Logout
+                          </a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="wrapper">
+		<div class="main main-raised" style="margin-right:30px;margin-left:30px;margin-top:0px;">
+			<div class="section section-basic" style="padding-left:20px">
+
+				<div class="container">
+          <i class="material-icons">arrow_backward</i><button style="margin-left:-115px;margin-top:-8px;" class="btn btn-simple btn-primary" ui-sref="dashboard">Back To Dashboad</div></button>
+          <div id="comments">
+						<div class="media">
+							<a class="pull-left" href="#pablo">
+								<div class="avatar">
+								 <img class="media-object pointer" ui-sref="profile({'user': question.username} )" alt="Tim Picture" src="https://api.adorable.io/avatars/285/{{question.username}}@adorable.io.png">
+								</div>
+							</a>
+							<div class="media-body">
+							 <h4 style="padding-top:10px;" ui-sref="profile({'user': question.username} )" class="pointer media-heading">{{question.username}}<br><small><span class="label label-default" style="border-radius:3px">{{question.category}}</span></small><br><small>asked {{timeService.getTime(question.questionID)}}</small></h4>
+
+            <div class="title">
+  						<h2>{{question.question}}</h2>
+    				</div>
+            <p>{{question.description}}</p>
+					</div>
+				</div>
+                    <div class="title">
+		                    <h3 style="margin-left:20px">Answers</h3>
+		                </div>
+		        		<div class="row">
+									<div ng-show="showLoaderx == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
+		        			<div ng-show="showLoaderx == false" class="col-md-8 col-md-offset-1">
+		        				<div class="media-area">
+		        					<h3 class="title text-center">{{answers.length}} Answers</h3>
+		        					<div class="media" ng-repeat="answer in answers">
+		        						<a class="pull-left pointer" ui-sref="profile({'user': answer.username} )">
+		        							<div class="avatar">
+		        								<img class="media-object" src="https://api.adorable.io/avatars/285/{{answer.username}}@adorable.io.png">
+		        							</div>
+		        						</a>
+		        						<div class="media-body" style="padding-top:10px;">
+		        							<h4 class="media-heading">{{answer.username}}<small>· {{timeService.getTime(answer.answerID)}}</small></h4>
+		        							<h6 class="text-muted"></h6>
+                          <p ng-bind-html="getFormattedAnswer(answer.answer)"></p>
+
+		        							<!-- <div class="media-footer">
+		        								<a href="#pablo" class="btn btn-primary btn-simple pull-right" rel="tooltip" title="" data-original-title="Reply to Comment">
+		        									<i class="material-icons">reply</i> Reply
+		        								</a>
+		        								<a href="#pablo" class="btn btn-danger btn-simple pull-right">
+		        									<i class="material-icons">favorite</i> 243
+		        								</a>
+		        							</div> -->
+
+		        						</div>
+		        					</div>
+											<div class="media">
+		        							<div class="media media-post">
+		        								<a class="pull-left author" href="#pablo">
+		        									<div class="avatar pointer" ui-sref="profile({'user': userInfoService.getUserInfo().username} )">
+		        										<img class="media-object" alt="64x64" src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo().username}}@adorable.io.png">
+		        									</div>
+		        								</a>
+		        								<div class="media-body">
+		        										<div class="form-group is-empty"><textarea ng-model="user_answer" class="form-control" placeholder="Write a nice reply or go home..." rows="4"></textarea><span class="material-input"></span></div>
+		        										<div class="media-footer">
+		        											<a class="btn btn-primary pull-right" ng-disabled="!user_answer" ng-if="showLoader == false" ng-click="add_answer()">
+		        												<i class="material-icons">reply</i> Reply
+		        											</a>
+																	<div ng-show="showLoader == true" class="preloader4 pull-right" style="margin-top:30px;margin-bottom:20px;"></div>
+		        										</div>
+		        								</div>
+		        							</div>
+		        						</div>
+		        					</div>
+		        				</div>
+		        			</div>
+		        		</div>
+								<div ng-show="similiarQuestions.length > 0">
+								<div class="title">
+									<h2><i class="material-icons">subject</i>&nbsp;Similar questions asked:</h2>
+								</div>
+								<div class="row">
+									<!-- <h2 ng-if="questions.length == 0">No questions to read.</h1> -->
+									<div class="col-md-4" ng-repeat="card in similiarQuestions" style="cursor:pointer" ui-sref="question({'q': card.questionID} )">
+										<div class="card">
+											<div class="card-content" style="position:relative">
+												<!-- <h6 class="category text-danger">
+				    									<i class="material-icons">library_books</i> Category
+															<i class="material-icons">business</i>
+				    								</h6> -->
+												<h4 class="card-title">
+				    									<a href="#pablo">{{card.question}}</a>
+				    								</h4>
+														<p>{{card.description}}</p>
+												<div class="footer">
+													<div ui-sref="profile({'user':card.username})" class="author pointer">
+														<a>
+			                         <img src="https://api.adorable.io/avatars/285/{{card.username}}@adorable.io.png" alt="..." style="border-radius:3px;" class="avatar img-raised">
+			                         <span>{{card.username}}</span>
+			                      </a>
+													</div>
+													<div class="stats">
+														<span class="label label-info">{{card.category}}</span>
+														<i class="material-icons">chat_bubble</i> 45
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+		       </div>
+				</div>
+				<!--CARDS SECTION-->
+			</div>
+		</div>

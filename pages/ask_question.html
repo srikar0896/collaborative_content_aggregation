@@ -1,0 +1,43 @@
+<div class="section landing-section" ng-controller='questionController'>
+	<i class="material-icons">arrow_backward</i><button style="margin-left:-115px;margin-top:-8px;" class="btn btn-simple btn-primary" ui-sref="dashboard">Back To Dashboad</button>
+
+	                <div class="row" style="margin-right:0px;">
+	                    <div class="col-md-9 col-md-offset-2">
+	                        <h2 class="text-center title">Ask Question</h2>
+							<h4 class="text-center description">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							</h4>
+	                        <form class="contact-form">
+	                            <div class="row">
+	                                <div class="col-md-6">
+										<div class="form-group label-floating is-empty">
+											<label class="control-label">Question in  short sentence</label>
+											<input type="text" ng-model="shortQuestion" class="form-control">
+										<span class="material-input"></span></div>
+	                                </div>
+	                                <div class="col-md-6">
+										<div class="form-group label-floating is-empty">
+											<label class="control-label">Category</label>
+											<input type="text" ng-model="questionCategory" class="form-control">
+										<span class="material-input"></span></div>
+	                                </div>
+	                            </div>
+
+								<div class="form-group label-floating is-empty">
+									<label class="control-label">Question Description</label>
+									<textarea class="form-control" ng-model="questionDescription"  rows="4"></textarea>
+								<span class="material-input"></span></div>
+
+	                            <div class="row">
+	                                <div ng-if="showLoader==false" class="col-md-4 col-md-offset-4 text-center">
+	                                    <button ng-disabled="!shortQuestion || !questionDescription || !questionCategory" ng-click="askQuestion()" class="btn btn-primary btn-raised">
+											Ask
+										</button>
+	                                </div>
+																	<div ng-if="showLoader == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                </div>
+
+	            </div>
