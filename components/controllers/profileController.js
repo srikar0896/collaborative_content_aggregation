@@ -14,7 +14,14 @@ function($scope,$state,apiService,userInfoService,$http,$rootScope,questionsServ
     $scope.username = userInfoService.getUserInfo()["username"];
 
   }
-
+  for (var i = 0; i < $scope.allQuestions.length; i++) {
+    if($scope.users.indexOf($scope.allQuestions[i].username)==-1){
+        $scope.users.push($scope.allQuestions[i].username);
+    }
+    if($scope.allQuestions[i].username == $scope.username){
+      $scope.userQuestions.push($scope.allQuestions[i]);
+    }
+  }
   $scope.isOwnerProfile = function(){
     if($scope.username == userInfoService.getUserInfo()["username"]){
       return true;
