@@ -15,25 +15,6 @@ function($scope,$state,apiService,userInfoService,$http,$rootScope,questionsServ
 
   }
 
-  for (var i = 0; i < $scope.allQuestions.length; i++) {
-    if($scope.users.indexOf($scope.allQuestions[i].username)==-1){
-        $scope.users.push($scope.allQuestions[i].username);
-    }
-    if($scope.allQuestions[i].username == $scope.username){
-      $scope.userQuestions.push($scope.allQuestions[i]);
-    }
-  }
-
-  if($stateParams.user){
-      if($scope.users.indexOf($stateParams.user)==-1){
-        $state.go("error");
-      }
-  }else{
-    if(!$scope.username){
-      $state.go("error");
-    }
-  }
-
   $scope.isOwnerProfile = function(){
     if($scope.username == userInfoService.getUserInfo()["username"]){
       return true;
