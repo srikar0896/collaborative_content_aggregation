@@ -15,7 +15,7 @@ app.service("userInfoService", function() {
       userInfo["isAuthenticated"] = true;
     },
     removeUser : function(property,value){
-      var userInfo = {};
+      userInfo = {};
       userInfo["isAuthenticated"] = false;
     }
 
