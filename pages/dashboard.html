@@ -25,7 +25,7 @@
                     <li ui-sref="profile">
                         <a ui-sref="profile">
                <img src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo()['username']}}@adorable.io.png" alt="..." style="border-radius:3px;height:24px;margin-top:-6px;" class="avatar img-raised">
-                              Profile
+                              {{userInfoService.getUserInfo()["username"]}}
             </a>
                     </li>
                     <li ui-sref="logout">
@@ -96,6 +96,12 @@
                             <button class="btn btn-simple btn-primary" ng-click="setCategories()" data-toggle="modal" data-target="#filterModal">
                                 Add filter
                             </button>
+                            <button class="btn btn-simple btn-primary" ng-click="getQuestions()">
+                                remove filter
+                            </button>
+                               <button class="btn btn-simple btn-primary" ng-click="getQuestions()">
+							    Refresh
+								</button>
                         </div>
                         <h2 ng-if="questions.length == 0">No questions to read.</h1>
 						<div class="col-md-4" ng-repeat="card in questions | orderBy : card.questionID : isReverse">
