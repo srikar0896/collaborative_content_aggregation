@@ -1,0 +1,122 @@
+<div ng-controller="adminPreferencesController">
+    <nav class="navbar navbar-info">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-primary">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand">ADMIN</a>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-primary">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ui-sref="ask">
+                        <a style="cursor:pointer" ui-sref="ask">
+            <i class="material-icons">add_circle_outline</i>CREATE POST<div class="ripple-container"></div></a>
+                    </li>
+                    <li ui-sref="adminDashboard">
+                        <a ui-sref="adminDashboard">
+	            <i class="material-icons">explore</i>
+	            Questions
+            </a>
+                    </li>
+                    <li ui-sref="users">
+                        <a ui-sref="users">
+               <!-- <img src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo()['username']}}@adorable.io.png" alt="..." style="border-radius:3px;height:24px;margin-top:-6px;" class="avatar img-raised"> -->
+                            <i class="material-icons">people</i>USERS<div class="ripple-container"></div></a>
+            </a>
+                    </li>
+                    <li class="active"  ui-sref="admin_preferences">
+                        <a style="cursor:pointer" ui-sref="admin_preferences">
+            <i class="material-icons">add_circle_outline</i>PREFERENCES<div class="ripple-container"></div></a>
+                    </li>
+                    <li ui-sref="stats">
+                        <a style="cursor:pointer" ui-sref="stats">
+            <i class="material-icons">timeline</i>Site Usage<div class="ripple-container"></div></a>
+                    </li>
+                    <li ui-sref="logout">
+                        <a ui-sref="logout">
+            <i class="material-icons">settings</i>
+            Logout
+                          </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="main main-raised" style="margin-right:30px;margin-left:30px;margin-top:0px;">
+          <div class="section landing-section">
+          	<i class="material-icons">arrow_backward</i><button style="margin-left:-115px;margin-top:-8px;" class="btn btn-simple btn-primary" ui-sref="admin">Back To Dashboad</button>
+
+          	                <div class="row" style="margin-right:0px;">
+          	                    <div class="col-md-9 col-md-offset-2">
+          	                        <h2 class="text-center title">Ask Question</h2>
+          							<h4 class="text-center description">
+          								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          							</h4>
+          	                        <form class="contact-form">
+          	                            <div class="row">
+          	                                <div class="">
+          										<div class="form-group label-floating is-empty">
+          											<label class="control-label">Number of Spam reports required to remove the question</label>
+          											<input type="text" ng-model="shortQuestion" class="form-control">
+          										<span class="material-input"></span></div>
+          	                                </div>
+          	                                <div class="">
+          										<div class="form-group label-floating is-empty">
+          											<label class="control-label">Number of inappropriate reports required to remove the question</label>
+          											<input type="text" ng-model="questionCategory" class="form-control">
+          										<span class="material-input"></span></div>
+          	                                </div>
+          	                            </div>
+                                        <div class="row">
+                                            <div class="">
+                              <div class="form-group label-floating is-empty togglebutton">
+
+                                <label>
+                                    <input type="checkbox" ng-model="isReverse"><span class="toggle"></span>
+                                    <span>Blocked User can post the question?</span>
+                                </label>
+                              <span class="material-input"></span></div>
+                                            </div>
+                                            <div class="form-group label-floating is-empty togglebutton">
+
+                                              <label>
+                                                  <input type="checkbox" ng-model="isReverse"><span class="toggle"></span>
+                                                  <span>Blocked User can answer the question?</span>
+                                              </label>
+                                            <span class="material-input"></span></div>
+                                        </div>
+                                        <div class="row">
+
+                                          <div class="form-group label-floating is-empty togglebutton">
+
+                                            <label>
+                                                <input type="checkbox" ng-model="isReverse"><span class="toggle"></span>
+                                                <span>Blocked User can login?</span>
+                                            </label>
+                                          <span class="material-input"></span></div>
+                                        </div>
+
+
+
+          	                            <div class="row">
+          	                                <div ng-if="showLoader==false" class="col-md-4 col-md-offset-4 text-center">
+          	                                    <button ng-disabled="!shortQuestion || !questionDescription || !questionCategory" ng-click="askQuestion()" class="btn btn-primary btn-raised">
+          											Ask
+          										</button>
+          	                                </div>
+          																	<div ng-if="showLoader == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
+          	                            </div>
+          	                        </form>
+          	                    </div>
+          	                </div>
+
+          	            </div>
+
+			</div>
+		</div>
+	</div>

@@ -12,27 +12,47 @@
             </div>
             <div class="collapse navbar-collapse" id="example-navbar-primary">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ui-sref="ask">
-                        <a style="cursor:pointer" ui-sref="ask">
-            <i class="material-icons">add_circle_outline</i>Create Thread<div class="ripple-container"></div></a>
+                    <li style="color: {{fontColor}}" ng-click="goToDashBoard()" id="createThread">
+                        <a style="cursor:pointer">
+                            <i class="material-icons">add_circle_outline</i>Create Thread
+                            <div class="ripple-container"></div>
+                        </a>
                     </li>
-                    <li class="active" ui-sref="dashboard">
+                    <li id="discover"  style="color: {{fontColor}}" class="active" ui-sref="dashboard">
                         <a ui-sref="dashboard">
-	            <i class="material-icons">explore</i>
-	            Discover
-            </a>
+                            <i class="material-icons">explore</i> Discover
+                        </a>
                     </li>
+
                     <li ui-sref="profile">
                         <a ui-sref="profile">
-               <img src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo()['username']}}@adorable.io.png" alt="..." style="border-radius:3px;height:24px;margin-top:-6px;" class="avatar img-raised">
-                              {{userInfoService.getUserInfo()["username"]}}
+                            <img src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo()['username']}}@adorable.io.png" alt="..." style="border-radius:3px;height:24px;margin-top:-6px;" class="avatar img-raised"> {{userInfoService.getUserInfo()["username"]}}
+                        </a>
+                    </li>
+                    <li ui-sref="groups">
+                        <a ui-sref="groups">
+                          <i class="material-icons">group</i>      Groups
+            </a>
+                    </li>
+                    <li ui-sref="notifications">
+                        <a ui-sref="notifications">
+                        <i class="material-icons">notifications</i>      Notifications
+            </a>
+                    </li>
+                    <li id="discover"  style="color: {{fontColor}}" ui-sref="bookmarks">
+                        <a ui-sref="bookmarks">
+                            <i class="material-icons">bookmark</i> Saved Questions
+                        </a>
+                    </li>
+                    <li ui-sref="guidelines">
+                        <a ui-sref="guidelines">
+                          <i class="material-icons">forum</i>       community guidelines
             </a>
                     </li>
                     <li ui-sref="logout">
                         <a ui-sref="logout">
-            <i class="material-icons">settings</i>
-            Logout
-                          </a>
+                            <i class="material-icons">settings</i> Logout
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -42,53 +62,75 @@
         <div class="main main-raised" style="margin-right:30px;margin-left:30px;margin-top:0px;">
             <div class="section section-basic">
                 <div class="container">
-                    <div class="title collapse navbar-collapse">
-                        <h2>Categories</h2>
-                    </div>
-                    <div class="row collapse navbar-collapse">
-                        <div class="col-md-12">
-                            <button ng-repeat="category in  categories track by $index" class="btn btn-default btn-round">
-                                <!-- <i class="material-icons">smartphone</i>Gadgets -->
-                                {{category}}
-                                <div class="ripple-container"></div>
-                            </button>
+
+                  <div class="col-md-12" ng-repeat="post in posts">
+
+                    <div class="card">
+                      <div class="card-content content-info alert" style="position:relative;margin-bottom:0px;">
+                        <div class="container" style="position:absolute;margin-left:-90px;">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                          </button>
                         </div>
+                        <!-- <h6 class="category text-danger">
+                              <i class="material-icons">library_books</i> Category
+                              <i class="material-icons">business</i>
+                            </h6> -->
+                        <h4 class="card-title pointer">
+                              <a>{{post.postHeading}}</a>
+                            </h4>
+                            <p style="max-height:60px;overflow:hidden;min-height:35px;">{{post.postDescription}}</p>
+                        <div class="footer">
+                          <div class="author pointer">
+                            <a>
+                               <img src="https://s3.amazonaws.com/images.1776productions.com/apptoolkit/images/usersicon.png" alt="..." style="border-radius:3px;box-shadow:none" class="avatar img-raised">
+                               <span>ADMIN</span>
+                            </a>
+                          </div>
+                          <div class="stats">
+
+                            <small>{{timeService.getTime(post.postID)}}</small>
+                          </div>
+                        </div>
+                      </div>
+
                     </div>
+                  </div>
                     <div class="title">
                         <h2><i class="material-icons">subject</i>Stories To Read</h2>
                     </div>
                     <div ng-show="showLoaderx == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
                     <div ng-show="showLoaderx == false" class="row">
                         <!-- <div class="col-md-4">
-							<div class="card" style="box-shadow:none !important;">
-								<div class="card-content content-info" style="position:relative;">
-									<h5 class="category-social">
-                                  <i class="fa fa-map"></i> Travel
-                                </h5>
-									<h4 class="card-title">
-                                  <a href="#pablo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</a>
-                                </h4>
-									<div class="footer">
-										<b>Answer:</b><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur...</p>
+            							<div class="card" style="box-shadow:none !important;">
+            								<div class="card-content content-info" style="position:relative;">
+            									<h5 class="category-social">
+                                              <i class="fa fa-map"></i> Travel
+                                            </h5>
+            									<h4 class="card-title">
+                                              <a href="#pablo">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</a>
+                                            </h4>
+            									<div class="footer">
+            										<b>Answer:</b><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur...</p>
 
-										<div class="author">
-											<a href="#pablo">
-                                                         <img src="https://www.learningbygivingfoundation.org/images/pages/learning/testimonial_alexandra_fraenkel.jpg" alt="..." class="avatar img-raised">
-                                                         <span>Jhon Snow</span>
-                                                      </a>
-										</div>
-										<div class="stats">
-											<i class="material-icons">favorite</i> 2.4K ·
-											<i class="material-icons">share</i> 45
-										</div>
-										<center>
-																	<a href="thread_2196.html" class="btn btn-primary btn-round"><i class="material-icons">subject</i> Read<div class="ripple-container"></div></a>
-										</center>
-									</div>
-								</div>
-							</div>
-						</div>-->
-                        <div class="togglebutton pull-right collapse navbar-collapse" style="margin-top: -80px">
+            										<div class="author">
+            											<a href="#pablo">
+                                                                     <img src="https://www.learningbygivingfoundation.org/images/pages/learning/testimonial_alexandra_fraenkel.jpg" alt="..." class="avatar img-raised">
+                                                                     <span>Jhon Snow</span>
+                                                                  </a>
+            										</div>
+            										<div class="stats">
+            											<i class="material-icons">favorite</i> 2.4K ·
+            											<i class="material-icons">share</i> 45
+            										</div>
+            										<center>
+            																	<a href="thread_2196.html" class="btn btn-primary btn-round"><i class="material-icons">subject</i> Read<div class="ripple-container"></div></a>
+            										</center>
+            									</div>
+            								</div>
+            							</div>
+            						</div>-->
+                        <div class="togglebutton pull-right" style="margin-top: -80px">
                             <label>
                                 <input type="checkbox" ng-model="isReverse"><span class="toggle"></span>
                                 <span>Show Latest First</span>
@@ -99,12 +141,55 @@
                             <button class="btn btn-simple btn-primary" ng-click="getQuestions()">
                                 remove filter
                             </button>
-                               <button class="btn btn-simple btn-primary" ng-click="getQuestions()">
+                            <button class="btn btn-simple btn-primary" ng-click="getQuestions()">
 							    Refresh
 								</button>
                         </div>
-                        <h2 ng-if="questions.length == 0">No questions to read.</h1>
-						<div class="col-md-4" ng-repeat="card in questions | orderBy : card.questionID : isReverse">
+                        <center>
+                            <h2 ng-if="questions.length == 0">No questions to read.</h1></center>
+          <div class="row">
+            <i ng-click="showTodayQuestions = true" title="show this section" ng-show="showTodayQuestions == false" class="pointer material-icons questionShowChevron">keyboard_arrow_down</i>
+            <i ng-click="showTodayQuestions = false"  ng-show="showTodayQuestions == true && todayQuestions.length > 0" class="pointer material-icons questionShowChevron">keyboard_arrow_up</i>
+            <h6 style="font-weight: 600;
+    margin-left: 18px;" ng-if="todayQuestions.length > 0">Today :</h6>
+
+            <div class="col-md-4" ng-show="showTodayQuestions == true" ng-repeat="todayQuestion in todayQuestions | orderBy : todayQuestion.questionID : isReverse">
+
+							<div class="card" style="min-height:180px;">
+								<div class="card-content" style="position:relative">
+									<!-- <h6 class="category text-danger">
+	    									<i class="material-icons">library_books</i> Category
+												<i class="material-icons">business</i>
+	    								</h6> -->
+									<h4 class="card-title pointer">
+	    									<a ui-sref="question({'q': todayQuestion.questionID} )">{{todayQuestion.question}}</a>
+	    								</h4>
+											<p style="max-height:60px;overflow:hidden;min-height:35px;">{{todayQuestion.description}}</p>
+									<div class="footer">
+										<div class="author pointer">
+											<a ui-sref="profile({'user': todayQuestion.username} )">
+                         <img src="https://api.adorable.io/avatars/285/{{todayQuestion.username}}@adorable.io.png" alt="..." style="border-radius:3px;" class="avatar img-raised">
+                         <span>{{todayQuestion.username}}</span>
+                      </a>
+										</div>
+										<div class="stats">
+											<span class="label label-info">{{todayQuestion.category}}</span>
+											<small>{{timeService.getTime(todayQuestion.questionID)}}</small>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+          </div>
+
+          <i ng-click="showYesterdayQuestions = true" ng-show="showYesterdayQuestions == false" class="pointer material-icons questionShowChevron">keyboard_arrow_down</i>
+          <i ng-click="showYesterdayQuestions = false"  ng-show="showYesterdayQuestions == true && yesterdayQuestions.length > 0" class="pointer material-icons questionShowChevron">keyboard_arrow_up</i>
+
+            <h6 style="font-weight: 600;margin-left: 18px;" ng-if="yesterdayQuestions.length > 0">Yesterday :</h6>
+            <div class="row">
+            <div class="col-md-4" ng-show="showYesterdayQuestions == true" ng-repeat="card in yesterdayQuestions | orderBy : card.questionID : isReverse">
+
 							<div class="card" style="min-height:180px;">
 								<div class="card-content" style="position:relative">
 									<!-- <h6 class="category text-danger">
@@ -131,9 +216,80 @@
 
 							</div>
 						</div>
+          </div>
+          <div class="row">
+            <i ng-click="showOlderQuestions = true" ng-show="showOlderQuestions == false" class="pointer material-icons questionShowChevron">keyboard_arrow_down</i>
+            <i ng-click="showOlderQuestions = false" ng-show="showOlderQuestions == true && olderQuestions.length >0" class="pointer material-icons questionShowChevron">keyboard_arrow_up</i>
+            <h6  style="font-weight: 600;margin-left: 18px;" ng-if="olderQuestions.length > 0">Older :</h6>
+            <div class="col-md-4" ng-show="showOlderQuestions == true" ng-repeat="card in olderQuestions | orderBy : card.questionID : isReverse">
 
+							<div class="card" style="min-height:180px;">
+								<div class="card-content" style="position:relative">
+									<!-- <h6 class="category text-danger">
+	    									<i class="material-icons">library_books</i> Category
+												<i class="material-icons">business</i>
+	    								</h6> -->
+									<h4 class="card-title pointer">
+	    									<a ui-sref="question({'q': card.questionID} )">{{card.question}}</a>
+	    								</h4>
+											<p style="max-height:60px;overflow:hidden;min-height:35px;">{{card.description}}</p>
+									<div class="footer">
+										<div class="author pointer">
+											<a ui-sref="profile({'user': card.username} )">
+                         <img src="https://api.adorable.io/avatars/285/{{card.username}}@adorable.io.png" alt="..." style="border-radius:3px;" class="avatar img-raised">
+                         <span>{{card.username}}</span>
+                      </a>
+										</div>
+										<div class="stats">
+											<span class="label label-info">{{card.category}}</span>
+											<small>{{timeService.getTime(card.questionID)}}</small>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+          </div>
+          <div class="row">
+          <div class="col-md-6">
+	                        <h3><small> Horizontal tabs</small></h3>
+	                        <ul class="nav nav-pills nav-pills-rose">
+	                          <li ng-class="" ng-repeat="q in groupQuestions track by $index"><a href="#{{q.time}}" data-toggle="tab" aria-expanded="false">{{q.groupName}}</a></li>
+	                          <!-- <li class=""><a href="#pill2" data-toggle="tab" aria-expanded="false">Settings</a></li>
+	                          <li class="active"><a href="#pill3" data-toggle="tab" aria-expanded="true">Options</a></li> -->
+	                        </ul>
+	                    	<div class="tab-content tab-space">
+	                    	    <div ng-repeat="q in groupQuestions track by $index" id="{{q.time}}" class="tab-pane">
+                              <div class="media">
+                  							<a class="pull-left" href="#pablo">
+                  								<div class="avatar">
+                  								 <img class="media-object pointer" ui-sref="profile({'user': q.username} )" alt="Tim Picture" src="https://api.adorable.io/avatars/285/{{q.username}}@adorable.io.png">
+                  								</div>
+                  							</a>
+                  							<div class="media-body">
+                  							 <h4 style="padding-top:10px;" ui-sref="profile({'user': q.username} )" class="pointer media-heading">{{q.username}}<br><small><span class="label label-default" style="border-radius:3px">{{q.category}}</span></small><br><small>asked {{timeService.getTime(q.time)}}</small></h4>
+
+                              <div class="title">
+                    						<h2 style="margin-top: -20px; margin-bottom: 0px;">{{q.question}}</h2>
+
+                      				</div>
+                              <p style="margin-top: -20px; margin-bottom: 0px;">{{q.description}}</p>
+                  					</div>
+
+                  				</div>
+	                    	    </div>
+	                    	    <!-- <div class="tab-pane" id="pill2">
+	                    	      Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
+	                    	      <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
+	                    	    </div>
+	                    		<div class="tab-pane active" id="pill3">
+	                    			Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
+	                    			<br><br>Dynamically innovate resource-leveling customer service for state of the art customer service.
+	                    	    </div> -->
+	                    	</div>
+	                    </div>
 					</div>
-
+        </div>
 					<!-- <div class="col-md-8 col-md-offset-2">
 						<div class="card card-plain card-blog" style="text-align:center;">
 							<div class="card-image">

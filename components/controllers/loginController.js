@@ -24,6 +24,7 @@ function($scope,$state,apiService,userInfoService,$http,$stateParams){
                     $scope.showLoader = false;
                     if(response.data.result == "success"){
                       userInfoService.setUserInfo('username',$scope.username);
+                      userInfoService.setUserInfo('isBlocked',response.data.isBlocked);
                       $state.go("dashboard");
                     }
                     if(response.data.result == "fail"){

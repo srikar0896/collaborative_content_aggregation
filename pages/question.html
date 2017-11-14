@@ -1,43 +1,62 @@
 <div ng-controller="openQuestionController">
 	<nav class="navbar navbar-primary">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-primary">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-				<a class="navbar-brand" href="#pablo">{{userInfoService.getUserInfo()["username"]}}</a>
-			</div>
+			<div class="container">
+					<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-primary">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand">{{userInfoService.getUserInfo()["username"]}}</a>
+					</div>
+					<div class="collapse navbar-collapse" id="example-navbar-primary">
+							<ul class="nav navbar-nav navbar-right">
+									<li style="color: {{fontColor}}" ng-click="goToDashBoard()" id="createThread">
+											<a style="cursor:pointer">
+													<i class="material-icons">add_circle_outline</i>Create Thread
+													<div class="ripple-container"></div>
+											</a>
+									</li>
+									<li id="discover"  style="color: {{fontColor}}" ui-sref="dashboard">
+											<a ui-sref="dashboard">
+													<i class="material-icons">explore</i> Discover
+											</a>
+									</li>
 
-			<div class="collapse navbar-collapse" id="example-navbar-primary">
-				<ul class="nav navbar-nav navbar-right">
-					<li ui-sref="ask">
-						<a style="cursor:pointer" ui-sref="ask">
-            <i class="material-icons">add_circle_outline</i>Create Thread<div class="ripple-container"></div></a>
-					</li>
-					<li class="active" ui-sref="dashboard">
-						<a ui-sref="dashboard">
-	            <i class="material-icons">explore</i>
-	            Discover
-            </a>
-					</li>
-					<li ui-sref="profile">
-						<a ui-sref="profile">
-               <img src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo()['username']}}@adorable.io.png" alt="..." style="border-radius:3px;height:24px;margin-top:-6px;" class="avatar img-raised">
-                              Profile
-            </a>
-					</li>
-					<li ui-sref="logout">
-						<a ui-sref="logout">
-            <i class="material-icons">settings</i>
-            Logout
-                          </a>
-					</li>
-				</ul>
+									<li ui-sref="profile">
+											<a ui-sref="profile">
+													<img src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo()['username']}}@adorable.io.png" alt="..." style="border-radius:3px;height:24px;margin-top:-6px;" class="avatar img-raised"> {{userInfoService.getUserInfo()["username"]}}
+											</a>
+									</li>
+									<li ui-sref="groups">
+											<a ui-sref="groups">
+												<i class="material-icons">group</i>      Groups
+					</a>
+									</li>
+									<li ui-sref="notifications">
+											<a ui-sref="notifications">
+											<i class="material-icons">notifications</i>      Notifications
+					</a>
+									</li>
+									<li id="discover"  style="color: {{fontColor}}" ui-sref="bookmarks">
+											<a ui-sref="bookmarks">
+													<i class="material-icons">bookmark</i> Saved Questions
+											</a>
+									</li>
+									<li ui-sref="guidelines">
+											<a ui-sref="guidelines">
+												<i class="material-icons">forum</i>       community guidelines
+					</a>
+									</li>
+									<li ui-sref="logout">
+											<a ui-sref="logout">
+													<i class="material-icons">settings</i> Logout
+											</a>
+									</li>
+							</ul>
+					</div>
 			</div>
-		</div>
 	</nav>
 	<div class="wrapper">
 		<div class="main main-raised" style="margin-right:30px;margin-left:30px;margin-top:0px;">
@@ -46,8 +65,8 @@
 				<div class="container">
           <i class="material-icons">arrow_backward</i><button style="margin-left:-115px;margin-top:-8px;" class="btn btn-simple btn-primary" ui-sref="dashboard">Back To Dashboad</div></button>
           <div id="comments">
-						<div class="media">
-							<a class="pull-left" href="#pablo">
+						<div ng-if="question.isSpam == 0" class="media" style="">
+							<a class="pull-left" data-target="#pablo">
 								<div class="avatar">
 								 <img class="media-object pointer" ui-sref="profile({'user': question.username} )" alt="Tim Picture" src="https://api.adorable.io/avatars/285/{{question.username}}@adorable.io.png">
 								</div>
@@ -57,19 +76,131 @@
 
             <div class="title">
   						<h2>{{question.question}}</h2>
+
     				</div>
             <p>{{question.description}}</p>
+            <div>
+
+                            <button class="btn btn-simple btn-primary" ng-click="markAsSpam(question,1)" data-toggle="modal" data-target="#filterModal">
+                                Report as Spam
+                            </button>
+                            <button class="btn btn-simple btn-primary" ng-click="markAsSpam(question,2)">
+                                Report as Inappropriate
+                            </button>
+														<button ng-show="questionsService.getBookmarks().indexOf(question)==-1" class="btn btn-simple btn-primary" ng-click="saveToBookmark(question)">
+                                save to bookmarks
+                            </button>
+														<button class="btn btn-social btn-simple btn-primary" style="" ng-show="questionsService.getBookmarks().indexOf(question)>-1">
+	                			<i class="animated bounceIn material-icons">done</i> saved to bookmarks
+	                		<div class="ripple-container"></div></button>
+                               <button class="btn btn-simple btn-primary" ng-click="deleteQuestion()" ng-if="isUserOwner()">
+													    Delete
+														</button>
+                        </div>
 					</div>
+
 				</div>
+				<div class="media" ng-if="question.isSpam == 1" style="background: rgba(247, 57, 57, 0.55);width: 98%;border-radius: 3px;">
+					<a class="pull-left" data-target="#pablo">
+						<div class="avatar">
+						 <img class="media-object pointer" ui-sref="profile({'user': question.username} )" alt="Tim Picture" src="https://api.adorable.io/avatars/285/{{question.username}}@adorable.io.png">
+						</div>
+					</a>
+					<div class="media-body">
+					 <h4 style="padding-top:10px;" ui-sref="profile({'user': question.username} )" class="pointer media-heading">{{question.username}}<br><small><span class="label label-default" style="border-radius:3px">{{question.category}}</span></small><br><small>asked {{timeService.getTime(question.questionID)}}</small></h4>
+
+				<div class="title">
+					<h2>{{question.question}}
+						<span class="label label-danger" style="position:absolute;border-radius:2px">Marked as spam</span>
+					</h2>
+
+				</div>
+				<p style="color:#595361">{{question.description}}</p>
+				<div>
+
+												<button class="btn btn-simple btn-primary" ng-disabled="true" ng-click="markAsSpam(question,1)" data-toggle="modal" data-target="#filterModal">
+														Reported as Spam
+												</button>
+												<button class="btn btn-simple btn-primary" ng-click="markAsSpam(question,2)">
+														Report as Inappropriate
+												</button>
+												<button class="btn btn-simple btn-primary" ng-click="deleteQuestion()" ng-if="isUserOwner()">
+					 Delete
+				 </button>
+										</div>
+			</div>
+
+		</div>
+		<div ng-if="question.isSpam == 2" class="media" style="">
+			<a class="pull-left" data-target="#pablo">
+				<div class="avatar">
+				 <img class="media-object pointer" ui-sref="profile({'user': question.username} )" alt="Tim Picture" src="https://api.adorable.io/avatars/285/{{question.username}}@adorable.io.png">
+				</div>
+			</a>
+			<div class="media-body">
+			 <h4 style="padding-top:10px;" ui-sref="profile({'user': question.username} )" class="pointer media-heading">{{question.username}}<br><small><span class="label label-default" style="border-radius:3px">{{question.category}}</span></small><br><small>asked {{timeService.getTime(question.questionID)}}</small></h4>
+
+		<!-- <div class="title">
+			<h2>{{question.question}}</h2>
+
+		</div>
+		<p>{{question.description}}</p> -->
+		<center>
+		<i class="material-icons" style="font-size:68px">visibility_off</i>
+		<h3>Marked as Inappropriate,needed admin review.</h3>
+	</center>
+	</div>
+
+</div>
                     <div class="title">
 		                    <h3 style="margin-left:20px">Answers</h3>
 		                </div>
+
+                            <div class="togglebutton pull-right" style="margin-right: 90px;margin-top: 37px;">
+                            <label>
+                                <input type="checkbox" ng-model="showAnswerOnly"><span class="toggle"></span>
+                                <span>Show Latest First</span>
+                            </label>
+                        	</div>
 		        		<div class="row">
 									<div ng-show="showLoaderx == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
 		        			<div ng-show="showLoaderx == false" class="col-md-8 col-md-offset-1">
 		        				<div class="media-area">
 		        					<h3 class="title text-center">{{answers.length}} Answers</h3>
-		        					<div class="media" ng-repeat="answer in answers">
+
+		        					<div ng-click="acceptAnswer(answer.answerID)" ng-if="showAnswerOnly == false" class="media pointer" ng-mouseover="acceptAnswerID = answer.answerID" ng-repeat="answer in answers" ng-mouseout="acceptAnswerID = ''">
+		        						<i ng-if="answer.isAcceptedAnswer == true" class="material-icons pull-right" style="color: #4caf50;font-size: 48px;margin-top: 12px;font-weight: 600">done</i>
+
+		        						<i class="material-icons pull-right" ng-if="answer.isAcceptedAnswer == false && acceptAnswerID == answer.answerID && isUserOwner()" style="color:darkgrey;font-size: 48px;margin-top: 12px;font-weight: 600">done</i>
+
+		        						<a class="pull-left pointer" ui-sref="profile({'user': answer.username} )">
+		        							<div class="avatar">
+		        								<img class="media-object" src="https://api.adorable.io/avatars/285/{{answer.username}}@adorable.io.png">
+		        							</div>
+		        						</a>
+		        						<div class="media-body" style="padding-top:10px;">
+		        							<h4 class="media-heading">{{answer.username}}<small>· {{timeService.getTime(answer.answerID)}}</small></h4>
+		        							<h6 class="text-muted"></h6>
+                          <div ng-bind-html="getFormattedAnswer(answer.answer)"></div>
+
+		        							<!-- <div class="media-footer">
+		        								<a data-target="#pablo" class="btn btn-primary btn-simple pull-right" rel="tooltip" title="" data-original-title="Reply to Comment">
+		        									<i class="material-icons">reply</i> Reply
+		        								</a>
+		        								<a data-target="#pablo" class="btn btn-danger btn-simple pull-right">
+		        									<i class="material-icons">favorite</i> 243
+		        								</a>
+		        							</div> -->
+
+		        						</div>
+
+
+		        					</div>
+		        					<div ng-click="acceptAnswer(answer.answerID)" ng-if="showAnswerOnly == true && answer.isAcceptedAnswer == true" class="media pointer" ng-mouseover="acceptAnswerID = answer.answerID" ng-repeat="answer in answers" ng-mouseout="acceptAnswerID = ''">
+		        						<i ng-if="answer.isAcceptedAnswer == true" class="material-icons pull-right" style="color: #4caf50;font-size: 48px;margin-top: 12px;font-weight: 600">done</i>
+
+		        						<i class="material-icons pull-right" ng-if="answer.isAcceptedAnswer == false && acceptAnswerID == answer.answerID && isUserOwner()" style="color:darkgrey;font-size: 48px;margin-top: 12px;font-weight: 600">done</i>
+
 		        						<a class="pull-left pointer" ui-sref="profile({'user': answer.username} )">
 		        							<div class="avatar">
 		        								<img class="media-object" src="https://api.adorable.io/avatars/285/{{answer.username}}@adorable.io.png">
@@ -81,19 +212,50 @@
                           <p ng-bind-html="getFormattedAnswer(answer.answer)"></p>
 
 		        							<!-- <div class="media-footer">
-		        								<a href="#pablo" class="btn btn-primary btn-simple pull-right" rel="tooltip" title="" data-original-title="Reply to Comment">
+		        								<a data-target="#pablo" class="btn btn-primary btn-simple pull-right" rel="tooltip" title="" data-original-title="Reply to Comment">
 		        									<i class="material-icons">reply</i> Reply
 		        								</a>
-		        								<a href="#pablo" class="btn btn-danger btn-simple pull-right">
+		        								<a data-target="#pablo" class="btn btn-danger btn-simple pull-right">
 		        									<i class="material-icons">favorite</i> 243
 		        								</a>
 		        							</div> -->
 
 		        						</div>
+
+
 		        					</div>
+											<!-- <div class="col-md-6">
+	                        <h3><small>Tabs with Icons on Card</small></h3>
+
+							Tabs with icons on Card
+							<div class="card card-nav-tabs">
+								<div class="header header-primary">
+									colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger"
+									<div class="nav-tabs-navigation">
+										<div class="nav-tabs-wrapper">
+											<ul class="nav nav-tabs" data-tabs="tabs">
+												<li class="active">
+													<a data-target="#answer" data-toggle="tab">
+														<i class="material-icons">face</i>
+														Answer
+													</a>
+												</li>
+												<li>
+													<a data-target="#preview" data-toggle="tab">
+														<i class="material-icons">chat</i>
+														Preview
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="card-content">
+									<div class="tab-content text-center">
+										<div class="tab-pane active" id="answer">
 											<div class="media">
 		        							<div class="media media-post">
-		        								<a class="pull-left author" href="#pablo">
+		        								<a class="pull-left author" data-target="#pablo">
 		        									<div class="avatar pointer" ui-sref="profile({'user': userInfoService.getUserInfo().username} )">
 		        										<img class="media-object" alt="64x64" src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo().username}}@adorable.io.png">
 		        									</div>
@@ -109,6 +271,129 @@
 		        								</div>
 		        							</div>
 		        						</div>
+												<p>super is awsome awsome awsome</p>
+										</div>
+										<div class="tab-pane" id="preview">
+											<div class="media">
+		        							<div class="media media-post">
+		        								<a class="pull-left author" data-target="#pablo">
+		        									<div class="avatar pointer" ui-sref="profile({'user': userInfoService.getUserInfo().username} )">
+		        										<img class="media-object" alt="64x64" src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo().username}}@adorable.io.png">
+		        									</div>
+		        								</a>
+		        								<div class="media-body">
+		        										  <p ng-bind-html="user_answer"></p>
+		        										<div class="media-footer">
+		        											<a class="btn btn-primary pull-right" ng-disabled="!user_answer" ng-if="showLoader == false" ng-click="add_answer()">
+		        												<i class="material-icons">reply</i> Reply
+		        											</a>
+																	<div ng-show="showLoader == true" class="preloader4 pull-right" style="margin-top:30px;margin-bottom:20px;"></div>
+		        										</div>
+		        								</div>
+		        							</div>
+		        						</div>
+												<p>super is awsome</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							End Tabs with icons on Card
+
+						</div> -->
+						<div class="card card-nav-tabs" style="margin-top:95px">
+													<div class="header header-success" style="margin-left:0px;margin-right:0px">
+														<!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+														<div class="nav-tabs-navigation">
+															<div class="nav-tabs-wrapper">
+																<ul class="nav nav-tabs" data-tabs="tabs">
+																	<li class="active pointer">
+																		<a data-target="#answer" data-toggle="tab">
+																			<i class="material-icons">chat</i>
+																			Answer
+																		</a>
+																	</li>
+																	<li class="pointer">
+																		<a data-target="#preview" data-toggle="tab">
+																			<i class="material-icons">remove_red_eye</i>
+																			Preview
+																		</a>
+																	</li>
+
+																</ul>
+															</div>
+														</div>
+													</div>
+													<div class="content">
+														<div class="tab-content">
+															<div class="tab-pane active" id="answer">
+																<div class="media">
+							        							<div class="media media-post">
+							        								<a class="pull-left author" data-target="#pablo">
+							        									<div class="avatar pointer" ui-sref="profile({'user': userInfoService.getUserInfo().username} )">
+							        										<img class="media-object" alt="64x64" src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo().username}}@adorable.io.png">
+							        									</div>
+							        								</a>
+							        								<div class="media-body">
+							        										<div class="form-group is-empty"><textarea ng-model="user_answer" class="form-control" placeholder="Write a nice reply or go home..." rows="4"></textarea><span class="material-input"></span></div>
+																					<div class="pull-left row animated slideInLeft" ng-show="showOptions == true">
+																						<button class="btn" style="margin-left: 18px;" data-toggle="modal" data-target="#addImageModal">
+																							<i class="material-icons">photo_size_select_actual</i>
+																							<div class="ripple-container"></div>
+																						</button>
+																						<button class="btn" data-toggle="modal" data-target="#addCodeModal">
+																							<i class="material-icons">code</i>
+																							<div class="ripple-container"></div>
+																						</button>
+																						<button class="btn" data-toggle="modal" data-target="#addLinkModal">
+																							<i class="material-icons">link</i>
+																							<div class="ripple-container"></div>
+																						</button>
+
+																						<button class="btn" ng-click="showOptions = !showOptions">
+																							<i class="material-icons">keyboard_arrow_left</i>
+																							<div class="ripple-container"></div>
+																						</button>
+																					</div>
+																					<div class="pull-left row animated slideInRight" ng-show="showOptions == false">
+																						<button class="btn" ng-click="showOptions = !showOptions" style="margin-left: 18px;">
+																							<i class="material-icons">keyboard_arrow_right</i>
+																							<div class="ripple-container"></div>
+																						</button>
+																					</div>
+																					<div class="media-footer">
+							        											<a class="btn btn-primary pull-right" ng-disabled="!user_answer" ng-if="showLoader == false" ng-click="add_answer()">
+							        												<i class="material-icons">reply</i> Reply
+							        											</a>
+																						<div ng-show="showLoader == true" class="preloader4 pull-right" style="margin-top:30px;margin-bottom:20px;"></div>
+							        										</div>
+							        								</div>
+							        							</div>
+							        						</div>
+															</div>
+															<div class="tab-pane" id="preview">
+																<div class="media">
+							        							<div class="media media-post">
+							        								<a class="pull-left author" data-target="#pablo">
+							        									<div class="avatar pointer" ui-sref="profile({'user': userInfoService.getUserInfo().username} )">
+							        										<img class="media-object" alt="64x64" src="https://api.adorable.io/avatars/285/{{userInfoService.getUserInfo().username}}@adorable.io.png">
+							        									</div>
+							        								</a>
+							        								<div class="media-body">
+							        										  <div ng-bind-html="getAnswerPreview()"></div>
+							        										<div class="media-footer">
+							        											<a class="btn btn-primary pull-right" ng-disabled="!user_answer" ng-if="showLoader == false" ng-click="add_answer()">
+							        												<i class="material-icons">reply</i> Reply
+							        											</a>
+																						<div ng-show="showLoader == true" class="preloader4 pull-right" style="margin-top:30px;margin-bottom:20px;"></div>
+							        										</div>
+							        								</div>
+							        							</div>
+							        						</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
 		        					</div>
 		        				</div>
 		        			</div>
@@ -127,7 +412,7 @@
 															<i class="material-icons">business</i>
 				    								</h6> -->
 												<h4 class="card-title">
-				    									<a href="#pablo">{{card.question}}</a>
+				    									<a data-target="#pablo">{{card.question}}</a>
 				    								</h4>
 														<p>{{card.description}}</p>
 												<div class="footer">
@@ -150,5 +435,68 @@
 		       </div>
 				</div>
 				<!--CARDS SECTION-->
+			</div>
+			<div class="modal fade in" id="addCodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								<i class="material-icons">clear</i>
+							</button>
+							<h4 class="modal-title">Add Code</h4>
+						</div>
+						<div class="modal-body">
+					       <textarea ng-model="codeUrl" class="form-control" placeholder="add Embed code" rows="4"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default btn-simple" ng-click="addCode(codeUrl);codeUrl=''" data-dismiss="modal" >Add</button>
+							<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade in" id="addLinkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								<i class="material-icons">clear</i>
+							</button>
+							<h4 class="modal-title">Add Link</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group label-floating is-empty">
+								<label class="control-label">text to appearl</label>
+								<input ng-model="linkText"  type="text" class="form-control">
+								<span class="material-input"></span>
+						</div>
+							<!-- <textarea class="form-control" placeholder="text To Appear" rows="4"></textarea> -->
+					       <textarea ng-model="linkLocation" class="form-control" placeholder="add link" rows="4"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default btn-simple" ng-click="addLink(linkText,linkLocation);linkText='';linkLocation=''" data-dismiss="modal">Add</button>
+							<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade in" id="addImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								<i class="material-icons">clear</i>
+							</button>
+							<h4 class="modal-title">Add Image</h4>
+						</div>
+						<div class="modal-body">
+					       <textarea ng-model="imageUrl" class="form-control" placeholder="add Image url" rows="4"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default btn-simple" ng-click="addImage(imageUrl);imageUrl=''" data-dismiss="modal">Add</button>
+							<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>

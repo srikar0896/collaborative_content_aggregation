@@ -32,6 +32,10 @@ app.service("timeService", function(){
            }
          }
      }
+   },
+   getCurrentTime : function(){
+     var x = new Date().getTime();
+     return x;
    }
  }
 });

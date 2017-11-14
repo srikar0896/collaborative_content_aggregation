@@ -1,0 +1,59 @@
+<div class="section landing-section" ng-controller='adminPostController'>
+	<i class="material-icons">arrow_backward</i><button style="margin-left:-115px;margin-top:-8px;" class="btn btn-simple btn-primary" ui-sref="adminDashboard">Back To Dashboad</button>
+
+	                <div class="row" style="margin-right:0px;">
+	                    <div class="col-md-9 col-md-offset-2">
+	                        <h2 class="text-center title">Create Post</h2>
+							<h4 class="text-center description">
+
+							</h4>
+	                        <form class="contact-form">
+	                            <div class="row">
+	                                <div class="col-md-12">
+										<div class="form-group label-floating is-empty">
+											<label class="control-label">Post Heading</label>
+											<input type="text" ng-model="shortQuestion" class="form-control">
+										<span class="material-input"></span></div>
+	                                </div>
+
+	                            </div>
+
+								<div class="form-group label-floating is-empty">
+									<label class="control-label">Post Description</label>
+									<textarea class="form-control" ng-model="questionDescription"  rows="4"></textarea>
+	                            <div ng-show="showGroupSelector == false" class="row">
+	                                <div ng-if="showLoader==false" class="col-md-4 col-md-offset-4 text-center">
+	                                    <button data-toggle="modal" data-target="#confirmModal" ng-disabled="!shortQuestion || !questionDescription" class="btn btn-primary btn-raised">
+											Create Post
+										</button>
+	                                </div>
+																	<div ng-if="showLoader == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
+	                            </div>
+	                        </form>
+	                    </div>
+	                </div>
+									<div class="modal fade in" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+						        <div class="modal-dialog">
+						          <div class="modal-content">
+						            <!-- <div class="modal-header">
+													Confirm Create Post
+						            </div> -->
+						            <div class="modal-body">
+													<h4>Please enter the master password to create the post.</h4>
+													<div class="col-md-6">
+														<div class="form-group label-floating is-empty">
+															<label class="control-label">master password</label>
+															<input type="password" ng-model="password" class="form-control">
+															<span class="material-input"></span>
+														</div>
+													</div>
+						            </div><br>
+						            <div class="modal-footer">
+													<button data-dismiss="modal" ng-disabled="!password" ng-click="authenticate()" class="btn btn-primary btn-raised">
+														Done
+													</button>
+						            </div>
+						          </div>
+						        </div>
+						      </div>
+	            </div>

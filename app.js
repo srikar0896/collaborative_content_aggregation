@@ -1,7 +1,7 @@
-var  app = angular.module('app',['ui.router','ngSanitize']);
+var  app = angular.module('app',['ui.router','ngSanitize','chart.js']);
 
 app.controller('mainController',['$scope','$state','userInfoService',function($scope,$state,userInfoService){
-   $state.go("login");
+   $state.go("dashboard");
    $scope.userInfoService = userInfoService;
 }]);
 

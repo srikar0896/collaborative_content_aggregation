@@ -5,7 +5,6 @@
 	                    <div class="col-md-9 col-md-offset-2">
 	                        <h2 class="text-center title">Ask Question</h2>
 							<h4 class="text-center description">
-Provide relevant category. Share your research,so that ask the questions can be answered not only discussed.								
 							</h4>
 	                        <form class="contact-form">
 	                            <div class="row">
@@ -26,9 +25,28 @@ Provide relevant category. Share your research,so that ask the questions can be 
 								<div class="form-group label-floating is-empty">
 									<label class="control-label">Question Description</label>
 									<textarea class="form-control" ng-model="questionDescription"  rows="4"></textarea>
-								<span class="material-input"></span></div>
 
-	                            <div class="row">
+								<span class="material-input"></span></div>
+								<div class="checkbox">
+							<label>
+								<input ng-model="showGroupSelector" type="checkbox" name="optionsCheckboxes" checked=""><span class="checkbox-material"><span class="check"></span></span>
+								Ask in Group
+							</label>
+						</div>
+						<div class="row" ng-show="showGroupSelector == true">
+							<h6 style="font-weight:600">Select any of group:</h6>
+							<x ng-repeat="group in groups">
+							<button ng-class="selectedGroups.indexOf(group.groupName)>-1 ? 'btn-twitter animated bounceIn' : 'x'" ng-click="addGroup(group.groupName)" style="float: left; margin-left: 40px; width: 180px; height: 180px;font-weight:700;font-size:17px;padding:0px;" class="btn btn-social btn-fill">
+								<p><small><i style="font-size: 26px; margin-top: -5px;" ng-show="selectedGroups.indexOf(group.groupName)>-1" class="material-icons">done</i></small>#{{group.groupName}}</p>
+																												<!-- <span  ng-click="showgroupDetail(group)" style="clear: both; float: left; margin-left: 95px;" data-toggle="modal" data-target="#userModal" class="pointer">members</span> -->
+
+
+							</button>
+
+							</x>
+						</div>
+
+	                            <div ng-show="showGroupSelector == false" class="row">
 	                                <div ng-if="showLoader==false" class="col-md-4 col-md-offset-4 text-center">
 	                                    <button ng-disabled="!shortQuestion || !questionDescription || !questionCategory" ng-click="askQuestion()" class="btn btn-primary btn-raised">
 											Ask
@@ -36,8 +54,52 @@ Provide relevant category. Share your research,so that ask the questions can be 
 	                                </div>
 																	<div ng-if="showLoader == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
 	                            </div>
+															<div ng-show="showGroupSelector == true && selectedGroups.length == 1" class="row">
+	                                <div ng-if="showLoader==false" class="col-md-4 col-md-offset-4 text-center">
+	                                    <button ng-disabled="!shortQuestion || !questionDescription || !questionCategory" ng-click="askGroupQuestion()" class="btn btn-primary btn-raised">
+											Ask in Selected Group
+										</button>
+	                                </div>
+																	<div ng-if="showLoader == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
+	                            </div>
+															<div ng-show="showGroupSelector == true && selectedGroups.length == 0" class="row">
+	                                <div ng-if="showLoader==false" class="col-md-4 col-md-offset-4 text-center">
+	                                    <button ng-disabled="true" class="btn btn-danger btn-raised">
+											Please select a group.
+										</button>
+	                                </div>
+																	<div ng-if="showLoader == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
+	                            </div>
+															<div ng-show="showGroupSelector == true && selectedGroups.length >1" class="row">
+	                                <div ng-if="showLoader==false" class="col-md-4 col-md-offset-4 text-center">
+	                                    <button ng-disabled="!shortQuestion || !questionDescription || !questionCategory" ng-click="askGroupQuestion()" class="btn btn-primary btn-raised">
+											Ask in Selected Groups
+										</button>
+	                                </div>
+																	<div ng-if="showLoader == true" class="preloader4 col-md-offset-6" style="margin-top:30px;margin-bottom:20px;"></div>
+	                            </div>
 	                        </form>
 	                    </div>
 	                </div>
+									<div class="modal fade in" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+						        <div class="modal-dialog">
+						          <div class="modal-content">
+						            <div class="modal-header">
+						                          <h4 class="modal-title">Users in <b>{{detailgroup.groupName}}</b> Group: <button type="button" class="btn btn-danger btn-simple pull-right" style="margin-top:-10px;" data-dismiss="modal">Cancel</button></h4>
+						            </div>
+						            <div class="modal-body">
+						                  <div class="col-md-6 col-sm-3">
 
+						                <div ng-repeat ="u in detailgroupUsers" class="avatar pointer row" style="margin-bottom:20px" ui-sref="profile({'user': u} )">
+						                  <img class="media-object" alt="64x64" style="margin-right:20px;height:60px;border-radius:3px;float:left" src="https://api.adorable.io/avatars/285/{{u}}@adorable.io.png">
+						                  <p style="margin-top:15px;">{{u}}</p>
+						                </div>
+						              </div>
+						            </div>
+						            <div class="modal-footer">
+
+						            </div>
+						          </div>
+						        </div>
+						      </div>
 	            </div>

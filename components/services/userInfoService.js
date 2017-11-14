@@ -3,6 +3,7 @@ app.service("userInfoService", function() {
   var userInfo = {
     isAuthenticated : false
   };
+  var users = [];
   return{
     getUserInfo : function(){
       console.log(userInfo);
@@ -17,6 +18,12 @@ app.service("userInfoService", function() {
     removeUser : function(property,value){
       userInfo = {};
       userInfo["isAuthenticated"] = false;
+    },
+    setUsers : function(data){
+      users = data;
+    },
+    getUsers : function(){
+      return users;
     }
 
   }
