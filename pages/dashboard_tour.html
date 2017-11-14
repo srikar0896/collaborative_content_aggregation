@@ -1,3 +1,318 @@
+<style>
+    @-webkit-keyframes showSweetAlert {
+        0% {
+            transform: scale(0.7);
+            -webkit-transform: scale(0.7);
+        }
+        45% {
+            transform: scale(1.05);
+            -webkit-transform: scale(1.05);
+        }
+        80% {
+            transform: scale(0.95);
+            -webkit-tranform: scale(0.95);
+        }
+        100% {
+            transform: scale(1);
+            -webkit-transform: scale(1);
+        }
+    }
+
+    @keyframes showSweetAlert {
+        0% {
+            transform: scale(0.7);
+            -webkit-transform: scale(0.7);
+        }
+        45% {
+            transform: scale(1.05);
+            -webkit-transform: scale(1.05);
+        }
+        80% {
+            transform: scale(0.95);
+            -webkit-tranform: scale(0.95);
+        }
+        100% {
+            transform: scale(1);
+            -webkit-transform: scale(1);
+        }
+    }
+
+    @-webkit-keyframes hideSweetAlert {
+        0% {
+            transform: scale(1);
+            -webkit-transform: scale(1);
+        }
+        100% {
+            transform: scale(0.5);
+            -webkit-transform: scale(0.5);
+        }
+    }
+
+    @keyframes hideSweetAlert {
+        0% {
+            transform: scale(1);
+            -webkit-transform: scale(1);
+        }
+        100% {
+            transform: scale(0.5);
+            -webkit-transform: scale(0.5);
+        }
+    }
+
+    @-webkit-keyframes animateSuccessTip {
+        0% {
+            width: 0;
+            left: 1px;
+            top: 19px;
+        }
+        54% {
+            width: 0;
+            left: 1px;
+            top: 19px;
+        }
+        70% {
+            width: 50px;
+            left: -8px;
+            top: 37px;
+        }
+        84% {
+            width: 17px;
+            left: 21px;
+            top: 48px;
+        }
+        100% {
+            width: 25px;
+            left: 14px;
+            top: 45px;
+        }
+    }
+
+    @keyframes animateSuccessTip {
+        0% {
+            width: 0;
+            left: 1px;
+            top: 19px;
+        }
+        54% {
+            width: 0;
+            left: 1px;
+            top: 19px;
+        }
+        70% {
+            width: 50px;
+            left: -8px;
+            top: 37px;
+        }
+        84% {
+            width: 17px;
+            left: 21px;
+            top: 48px;
+        }
+        100% {
+            width: 25px;
+            left: 14px;
+            top: 45px;
+        }
+    }
+
+    @-webkit-keyframes animateSuccessLong {
+        0% {
+            width: 0;
+            right: 46px;
+            top: 54px;
+        }
+        65% {
+            width: 0;
+            right: 46px;
+            top: 54px;
+        }
+        84% {
+            width: 55px;
+            right: 0px;
+            top: 35px;
+        }
+        100% {
+            width: 47px;
+            right: 8px;
+            top: 38px;
+        }
+    }
+
+    @keyframes animateSuccessLong {
+        0% {
+            width: 0;
+            right: 46px;
+            top: 54px;
+        }
+        65% {
+            width: 0;
+            right: 46px;
+            top: 54px;
+        }
+        84% {
+            width: 55px;
+            right: 0px;
+            top: 35px;
+        }
+        100% {
+            width: 47px;
+            right: 8px;
+            top: 38px;
+        }
+    }
+
+    @-webkit-keyframes rotatePlaceholder {
+        0% {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+        5% {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+        12% {
+            transform: rotate(-405deg);
+            -webkit-transform: rotate(-405deg);
+        }
+        100% {
+            transform: rotate(-405deg);
+            -webkit-transform: rotate(-405deg);
+        }
+    }
+
+    @keyframes rotatePlaceholder {
+        0% {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+        5% {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+        12% {
+            transform: rotate(-405deg);
+            -webkit-transform: rotate(-405deg);
+        }
+        100% {
+            transform: rotate(-405deg);
+            -webkit-transform: rotate(-405deg);
+        }
+    }
+
+    @-webkit-keyframes animateErrorIcon {
+        0% {
+            transform: rotateX(100deg);
+            -webkit-transform: rotateX(100deg);
+            opacity: 0;
+        }
+        100% {
+            transform: rotateX(0deg);
+            -webkit-transform: rotateX(0deg);
+            opacity: 1;
+        }
+    }
+
+    @keyframes animateErrorIcon {
+        0% {
+            transform: rotateX(100deg);
+            -webkit-transform: rotateX(100deg);
+            opacity: 0;
+        }
+        100% {
+            transform: rotateX(0deg);
+            -webkit-transform: rotateX(0deg);
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes animateXMark {
+        0% {
+            transform: scale(0.4);
+            -webkit-transform: scale(0.4);
+            margin-top: 26px;
+            opacity: 0;
+        }
+        50% {
+            transform: scale(0.4);
+            -webkit-transform: scale(0.4);
+            margin-top: 26px;
+            opacity: 0;
+        }
+        80% {
+            transform: scale(1.15);
+            -webkit-transform: scale(1.15);
+            margin-top: -6px;
+        }
+        100% {
+            transform: scale(1);
+            -webkit-transform: scale(1);
+            margin-top: 0;
+            opacity: 1;
+        }
+    }
+
+    @keyframes animateXMark {
+        0% {
+            transform: scale(0.4);
+            -webkit-transform: scale(0.4);
+            margin-top: 26px;
+            opacity: 0;
+        }
+        50% {
+            transform: scale(0.4);
+            -webkit-transform: scale(0.4);
+            margin-top: 26px;
+            opacity: 0;
+        }
+        80% {
+            transform: scale(1.15);
+            -webkit-transform: scale(1.15);
+            margin-top: -6px;
+        }
+        100% {
+            transform: scale(1);
+            -webkit-transform: scale(1);
+            margin-top: 0;
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes pulseWarning {
+        0% {
+            border-color: #F8D486;
+        }
+        100% {
+            border-color: #F8BB86;
+        }
+    }
+
+    @keyframes pulseWarning {
+        0% {
+            border-color: #F8D486;
+        }
+        100% {
+            border-color: #F8BB86;
+        }
+    }
+
+    @-webkit-keyframes pulseWarningIns {
+        0% {
+            background-color: #F8D486;
+        }
+        100% {
+            background-color: #F8BB86;
+        }
+    }
+
+    @keyframes pulseWarningIns {
+        0% {
+            background-color: #F8D486;
+        }
+        100% {
+            background-color: #F8BB86;
+        }
+    }
+</style>
 <div ng-controller="dashboardTourController">
     <nav class="navbar navbar-primary">
         <div class="container">
@@ -18,7 +333,7 @@
                             <div class="ripple-container"></div>
                         </a>
                     </li>
-                    <li id="discover"  style="color:black" class="active" ui-sref="dashboard">
+                    <li id="discover" style="color:black" class="active" ui-sref="dashboard">
                         <a ui-sref="dashboard">
                             <i class="material-icons">explore</i> Discover
                         </a>
@@ -31,13 +346,13 @@
                     </li>
                     <li id="groups" style="color:black" ui-sref="groups">
                         <a ui-sref="groups">
-                          <i class="material-icons">group</i>    Groups
-            </a>
+                            <i class="material-icons">group</i> Groups
+                        </a>
                     </li>
                     <li id="notifs" style="color:black" ui-sref="notifications">
                         <a ui-sref="notifications">
-                            <i class="material-icons">notifications</i>  Notifications
-            </a>
+                            <i class="material-icons">notifications</i> Notifications
+                        </a>
                     </li>
                     <li id="bookmarks" style="color:black" ui-sref="dashboard">
                         <a ui-sref="dashboard">
@@ -46,8 +361,8 @@
                     </li>
                     <li id="guidelines" style="color:black" ui-sref="guidelines">
                         <a ui-sref="guidelines">
-                            <i class="material-icons">forum</i>  community guidelines
-            </a>
+                            <i class="material-icons">forum</i> community guidelines
+                        </a>
                     </li>
                     <li id="logout" style="color:black" ui-sref="logout">
                         <a ui-sref="logout">
@@ -62,39 +377,39 @@
         <div class="main main-raised" style="margin-right:30px;margin-left:30px;margin-top:0px;">
             <div class="section section-basic">
                 <div class="container">
-                  <div class="col-md-12" id="adminPost" ng-repeat="post in posts">
+                    <div class="col-md-12" id="adminPost" ng-repeat="post in posts">
 
-                    <div class="card">
-                      <div class="card-content content-info alert" style="position:relative;margin-bottom:0px;">
-                        <div class="container" style="position:absolute;margin-left:-90px;">
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <div class="card">
+                            <div class="card-content content-info alert" style="position:relative;margin-bottom:0px;">
+                                <div class="container" style="position:absolute;margin-left:-90px;">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true"><i class="material-icons">clear</i></span>
                           </button>
-                        </div>
-                        <!-- <h6 class="category text-danger">
+                                </div>
+                                <!-- <h6 class="category text-danger">
                               <i class="material-icons">library_books</i> Category
                               <i class="material-icons">business</i>
                             </h6> -->
-                        <h4 class="card-title pointer">
+                                <h4 class="card-title pointer">
                               <a>{{post.postHeading}}</a>
                             </h4>
-                            <p style="max-height:60px;overflow:hidden;min-height:35px;">{{post.postDescription}}</p>
-                        <div class="footer">
-                          <div class="author pointer">
-                            <a>
-                               <img src="https://s3.amazonaws.com/images.1776productions.com/apptoolkit/images/usersicon.png" alt="..." style="border-radius:3px;box-shadow:none" class="avatar img-raised">
-                               <span>ADMIN</span>
-                            </a>
-                          </div>
-                          <div class="stats">
+                                <p style="max-height:60px;overflow:hidden;min-height:35px;">{{post.postDescription}}</p>
+                                <div class="footer">
+                                    <div class="author pointer">
+                                        <a>
+                                            <img src="https://s3.amazonaws.com/images.1776productions.com/apptoolkit/images/usersicon.png" alt="..." style="border-radius:3px;box-shadow:none" class="avatar img-raised">
+                                            <span>ADMIN</span>
+                                        </a>
+                                    </div>
+                                    <div class="stats">
 
-                            <small>{{timeService.getTime(post.postID)}}</small>
-                          </div>
+                                        <small>{{timeService.getTime(post.postID)}}</small>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                      </div>
-
                     </div>
-                  </div>
                     <div class="title">
                         <h2><i class="material-icons">subject</i>Stories To Read</h2>
                     </div>
@@ -271,13 +586,13 @@
                               <div class="title">
                     						<h2 style="margin-top: -20px; margin-bottom: 0px;">{{q.question}}</h2>
 
-                      				</div>
-                              <p style="margin-top: -20px; margin-bottom: 0px;">{{q.description}}</p>
-                  					</div>
+                    </div>
+                    <p style="margin-top: -20px; margin-bottom: 0px;">{{q.description}}</p>
+                </div>
 
-                  				</div>
-	                    	    </div>
-	                    	    <!-- <div class="tab-pane" id="pill2">
+            </div>
+        </div>
+        <!-- <div class="tab-pane" id="pill2">
 	                    	      Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas.
 	                    	      <br><br>Dramatically maintain clicks-and-mortar solutions without functional solutions.
 	                    	    </div>
@@ -285,11 +600,11 @@
 	                    			Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.
 	                    			<br><br>Dynamically innovate resource-leveling customer service for state of the art customer service.
 	                    	    </div> -->
-	                    	</div>
-	                    </div>
-					</div>
-        </div>
-					<!-- <div class="col-md-8 col-md-offset-2">
+    </div>
+</div>
+</div>
+</div>
+<!-- <div class="col-md-8 col-md-offset-2">
 						<div class="card card-plain card-blog" style="text-align:center;">
 							<div class="card-image">
 								<a href="#pablo">
@@ -311,39 +626,65 @@
 							<a href="#pablo" class="btn btn-primary btn-round"> Read More<div class="ripple-container"></div></a>
 						</div>
 					</div> -->
-				</div>
-				<!--CARDS SECTION-->
-				<!-- <div class="col-lg-4 col-md-6">
+</div>
+<!--CARDS SECTION-->
+<!-- <div class="col-lg-4 col-md-6">
 					<button class="btn btn-raised btn-round btn-default btn-block" data-toggle="modal" data-target="#noticeModal">
 							   <i class="material-icons">info_outline</i>
 							   Notice
 						   <div class="ripple-container"></div></button>
 				</div> -->
-			</div>
-		</div>
-	</div>
-	<div class="modal fade in" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+</div>
+</div>
+</div>
+<div class="modal fade in" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						<i class="material-icons">clear</i>
 					</button>
-					<h4 class="modal-title">Add Filter</h4>
-				</div>
-				<div class="modal-body">
-			        <div class="col-lg-5 col-md-6 col-sm-3">
-							<select id="filterSelect" style="height:150px" class="" data-style="select-with-transition" multiple title="Select Category" data-size="{{categories.length}}">
+                <h4 class="modal-title">Add Filter</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-5 col-md-6 col-sm-3">
+                    <select id="filterSelect" style="height:150px" class="" data-style="select-with-transition" multiple title="Select Category" data-size="{{categories.length}}">
 								<option disabled> Select Category</option>
 								<option value="{{cat}}" ng-repeat="cat in categories">{{cat}}</option>
 							</select>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default btn-simple" ng-click="applyFilter()" >Apply</button>
-					<button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cancel</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-simple" ng-click="applyFilter()">Apply</button>
+                <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade in" id="proceedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-right: 15px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+
+                <body>
+                  <center><h2>successfully Completed the tour.</h2></center>
+                    <div style="width: 80px; height: 80px; border-width: 4px; border-style: solid; border-color: rgb(76, 174, 76); border-radius: 50%; margin: 20px auto; position: relative; box-sizing: content-box;">
+                        <div style="border-radius: 120px 0px 0px 120px; position: absolute; width: 60px; height: 100px; background: white; transform: rotate(-45deg); top: -7px; left: -33px; transform-origin: 60px 60px 0px;"></div><span style="height: 5px; background-color: rgb(92, 184, 92); display: block; border-radius: 2px; position: absolute; z-index: 2; width: 25px; left: 14px; top: 46px; transform: rotate(45deg); animation: animateSuccessTip 0.75s;"></span>
+                        <span
+                            style="height: 5px; background-color: rgb(92, 184, 92); display: block; border-radius: 2px; position: absolute; z-index: 2; width: 47px; right: 8px; top: 38px; transform: rotate(-45deg); animation: animateSuccessLong 0.75s;"></span>
+                            <div style="width: 80px; height: 80px; border: 4px solid rgba(92, 184, 92, 0.2); border-radius: 50%; box-sizing: content-box; position: absolute; left: -4px; top: -4px; z-index: 2;"></div>
+                            <div style="width: 5px; height: 90px; background-color: rgb(255, 255, 255); position: absolute; left: 28px; top: 8px; z-index: 1; transform: rotate(-45deg);"></div>
+                            <div style="border-radius: 0px 120px 120px 0px; position: absolute; width: 60px; height: 120px; background: white; transform: rotate(-45deg); top: -11px; left: 30px; transform-origin: 0px 60px 0px; animation: rotatePlaceholder 4.25s ease-in;">
+                            </div>
+                    </div>
+                    <div class="footer text-center">
+                        <a ng-click="proceedToDashboard()" class="btn btn-social btn-fill btn-twitter btn-round">Proceed to your dashboard</a>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 </div>

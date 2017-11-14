@@ -85,7 +85,12 @@ var tour = new Tour({
     content: "You can minimize this section by clicking on this arrow.",
       placement:"bottom"
   }
-]});
+],
+onEnd: function (tour) {
+  $('#proceedModal').modal('show');
+  console.log("finished");
+}
+});
 
 tour.init();
 
@@ -100,6 +105,10 @@ Array.prototype.unique = function() {
         }
     }
     return arr;
+};
+$scope.proceedToDashboard = function(){
+    $('#proceedModal').modal('toggle');
+    $state.go("dashboard");
 };
   $scope.goToDashBoard = function(){
     if(userInfoService.getUserInfo()["username"] == "tester1"){
