@@ -13,6 +13,7 @@ function($scope,$state,apiService,userInfoService,$http,$stateParams){
        $state.go("adminDashboard");
        userInfoService.setUserInfo("username","admin");
        userInfoService.setUserInfo("isAdmin","true");
+      userInfoService.setUserInfo("isAuthenticated",true);
     }else {
       $scope.password = "";
 
