@@ -114,7 +114,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state("adminLogin", {
             url: '/admin_login',
-            authenticate: true,
+            authenticate: false,
             templateUrl: 'pages/admin_login.html'
         })
         .state("notifications", {
